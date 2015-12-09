@@ -1,16 +1,7 @@
-/*
-Yikai Wang
-APCS1 pd9
-HW43 -- This or That
-2015-12-07
-*/
-
-//skeleton file for class Binary
-
 public class Binary {
 
-    private int _decNum;
-    private String _binNum;
+    public int _decNum;
+    public String _binNum;
 
 
     /*=====================================
@@ -160,6 +151,7 @@ public class Binary {
     /****** YOUR IMPLEMENTATION HURRR ******/
     return compareTo( other ) == 0;   
     }
+    public int get(){return _decNum;}
 
 
     /*=============================================
@@ -168,10 +160,15 @@ public class Binary {
       post: Returns 0 if this Object is equal to the input Object,
       negative integer if this<input, positive integer otherwise
       =============================================*/
-    public int compareTo( Object other ) {
+    public int compareTo( Object o ) {
+	if(!(other instaceof Comparable))
+            throw new ClassCastException("Error, the input is not Binary");
+        if(other==null)
+            throw new NullPointerException("Error, input is null");
+
     /****** YOUR IMPLEMENTATION HURRR ******/
-    if ( other instanceof Binary ) {//if they are the same object
-      Binary obj = (Binary) other;
+    if ( o instanceof Binary ) {//if they are the same object
+      Binary obj = (Binary) o;
       if( (this._decNum == obj._decNum) || (this._binNum.equals(obj._binNum)) ) {
         return 0;//same values
       }
@@ -179,10 +176,36 @@ public class Binary {
       if(( this._decNum > obj._decNum ) || ( this._decNum > val )) {
         return 1;//if the other object is bigger
       }
+      else {
+	  return -1;
+      }
+    }
+    else if (o instanceof Rational){
+	Rational obj = (Rational) o;
+	if( this._decNum == obj.get()){
+	    return 0;
+	}
+	if(this._decNum> obj.get()){
+	    return 1;
+	}
+	else {
+	    return -1;
+	}
+    }
+    else if (o instanceof Hexadecimal){
+        Hexadecimal obj = (Hexadecimal) o;
+        if( this._decNum == obj.get()){
+            return 0;
+        }
+        if(this._decNum> obj.get()){
+            return 1;
+        }
+        else {
+            return -1;
+        }
     }
     return -1;
     }
-
 
     //main method for testing
     public static void main( String[] args ) {
@@ -190,30 +213,19 @@ public class Binary {
     System.out.println();
     System.out.println( "Testing ..." );
 
-    Binary b1 = new Binary(5);
+    Hexadecimal b1 = new Hexadecimal(5);
     Binary b2 = new Binary(5);
-    Binary b3 = b1;
     Binary b4 = new Binary(7);
+    
 
     System.out.println( b1 );//101
-    System.out.println( b2 );//101
-    System.out.println( b3 );//101     
+    System.out.println( b2 );//101//101     
     System.out.println( b4 );//111       
 
-    System.out.println( "\n==..." );
-    System.out.println( b1 == b2 ); //should be false
-    System.out.println( b1 == b3 ); //should be true
-
-    System.out.println( "\n.equals()..." );
-    System.out.println( b1.equals(b2) ); //should be true
-    System.out.println( b1.equals(b3) ); //should be true
-    System.out.println( b3.equals(b1) ); //should be true
-    System.out.println( b4.equals(b2) ); //should be false
-    System.out.println( b1.equals(b4) ); //should be false
+    System.out.println( "\n==..." ); //should be false //should be true
 
     System.out.println( "\n.compareTo..." );
-    System.out.println( b1.compareTo(b2) ); //should be 0
-    System.out.println( b1.compareTo(b3) ); //should be 0
+    System.out.println( b2.compareTo(b1) ); 
     System.out.println( b1.compareTo(b4) ); //should be neg
     System.out.println( b4.compareTo(b1) ); //should be pos
 

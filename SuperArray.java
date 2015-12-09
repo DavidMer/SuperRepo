@@ -19,7 +19,7 @@
  *  remove item (while maintaining "left-justification")
  *****************************/
 
-public class SuperArray implements ListInt{
+public class SuperArray{
  
     //~~~~~INSTANCE VARS~~~~~
     //underlying container, or "core" of this data structure:

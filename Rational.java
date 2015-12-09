@@ -1,8 +1,8 @@
 public class Rational {
 
     //instance vars
-    private int num;
-    private int den;
+    public int num;
+    public int den;
     
     //default constructor
     public Rational() {
@@ -46,9 +46,10 @@ public class Rational {
     }
     
     public double floatValue() {
-	return num * 1.0 / den;
+	return num * 1.0f / den;
     } 
-    
+    public double get(){return floatValue();}
+
     public void multiply (Rational og) {
 	num *= og.num; //updates num
 	den *= og.den; //updates den
@@ -85,14 +86,48 @@ public class Rational {
     /* by multiplying the num and den of one factor by the den/gcd of 
        the other we are essentially finding the lcm of both denominators */
 
-    public int compareTo(Rational r) {
-	double d1 = floatValue();
-	double d2 = r.floatValue();
-	if (d1 == d2) return 0;
-	if (d1 > d2) return 1;
+    public int compareTo( Object o ) {
+	/****** YOUR IMPLEMENTATION HURRR ******/
+	if ( o instanceof Hexadecimal ) {//if they are the same object
+	    Hexadecimal obj = (Hexadecimal) o;
+	    if( this.get() == obj.get()){
+                return 0;
+            }
+            if(this.get()> obj.get()){
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        }
+
+	else if (o instanceof Rational){
+	    Rational obj = (Rational) o;
+	    if( this.get() == obj.get()){
+		return 0;
+	    }
+	    if(this.get()> obj.get()){
+		    return 1;
+		}
+		else {
+		    return -1;
+		}
+	}
+	else if (o instanceof Binary){
+	    Binary obj = (Binary) o;
+	    if( this.get() == obj.get()){
+		return 0;
+	    }
+	    if(this.get()> obj.get()){
+		return 1;
+	    }
+	    else {
+		return -1;
+	    }
+	}
 	return -1;
     }
-
+    
     public boolean equals(Rational r) {
 	boolean retVal = this == r;
 	if ( !retVal ) {
@@ -110,7 +145,8 @@ public class Rational {
 	Rational t = new Rational(4, 6);
 	Rational v = new Rational(7, 21);
 	Rational w = new Rational(7, 21);
-
+	Binary mom = new Binary (123);
+	Hexadecimal dad = new Hexadecimal("12f");
 	System.out.println("--------------------------------");
 	
 	System.out.println("Testing toString(): ");
@@ -222,7 +258,7 @@ public class Rational {
 	System.out.println(s);
 	System.out.print("compare t and s: ");
 	System.out.print(t.compareTo(s) + "\n\n");
-
+	
         System.out.println("--------------------------------");
 
 	System.out.println("Testing equals():");
@@ -244,7 +280,7 @@ public class Rational {
 
 	System.out.println("Rational v equals w:");
 	System.out.println(v.equals(w));
-
+	System.out.println(v.compareTo(mom));
     }
   
 }
